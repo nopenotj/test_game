@@ -2,9 +2,9 @@
 
 # TODO
 
-- [] Draw Window to screen
-- [] Draw Square to screen
-- [] Use user input to make square move
+- [ ] Draw Window to screen
+- [ ] Draw Square to screen
+- [ ] Use user input to make square move
 
 
 
@@ -12,8 +12,8 @@
 
 Finding a library to provide API to draw stuff to screen
 
-Option
-----
+### Options
+
 LibX11 - Archiac
 Directly Interfacing with OpenGL -> too involved
 GLFW
