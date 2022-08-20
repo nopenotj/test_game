@@ -10,7 +10,7 @@ private:
     int i = 0;
 public:
     Character() {
-        texture.loadFromFile("./assests/link.png");
+        texture.loadFromFile("./assets/link.png");
         this->setTexture(texture);
         stop_move();
     }
@@ -56,8 +56,9 @@ int main()
 
     Character character;
     TileMap map;
-
+    character.setPosition(500,500);
     for(auto& c: map.tiles[0]) c.setFillColor(sf::Color::Blue);
+    map.tiles[3][3].setFillColor(sf::Color::Blue);
 
 
     while (window.isOpen())
@@ -72,20 +73,26 @@ int main()
 
         float d = 0.5;
 
-        float x,y = 0;
+        float x = 0,y = 0;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))  x -= d;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) x += d;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))  y += d;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))    x -= d;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))    y -= d;
         
         bool has_moved = x != 0 || y != 0;
 
         if (!has_moved) character.stop_move();
-
+        
         if (has_moved) { // possible optimization
+            character.move(x,y);
             // Check collision
+            // Currently checks against every possible boundary.
             bool has_collided = false;
-            auto& obstacle = map.tiles[0];
+            std::vector<Tile> obstacle;
+
+            for(auto &i :map.tiles[0]) obstacle.push_back(i);
+            obstacle.push_back(map.tiles[3][3]);
+            
             for (auto& o: obstacle) {
                 auto a = o.getGlobalBounds();
                 auto b = character.getGlobalBounds();
@@ -93,6 +100,7 @@ int main()
                     has_collided = true;
                 };
             }
+            if (has_collided) character.move(-x,-y);
         }
 
         window.clear();
