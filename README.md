@@ -1,14 +1,21 @@
 
 
-To run, build project by running `make` which produces executable. Because I have a custom location for my sfml library, i need to set it by running `export LD_LIBRARY_PATH=/usr/local/lib`
+To run, build project by running `make` which produces executable. Because I have a custom location for my sfml library, i need to set it by running `export LD_LIBRARY_PATH=/usr/local/lib`. 
+
+Goal : Try to come up with game engine without referring to existing game engine code.
 
 
 # TODO
 
-- [ ] Draw Window to screen
-- [ ] Draw Square to screen
-- [ ] Use user input to make square move
-
+- [x] Draw Window to screen
+- [x] Draw Square to screen
+- [x] Use user input to make square move
+- [ ] Collision Detection
+  - [X] Basic
+  - [ ] Fix Bugs
+- [ ] Draw TileMap
+  - [ ] Add texture to TileMap
+ 
 
 # DAY 1
 
@@ -33,4 +40,6 @@ need to do collision detection.
 
 Very basic collision detection algorithm. Using the library's [globalbounds object](https://www.sfml-dev.org/tutorials/2.5/graphics-transform.php) after each movement we check whether the movement will cause 2 opaque objects to intersect. If intersect we reverse this movement.
 
+# Day 4
+Refactored code alittle + added some texture for background
 
