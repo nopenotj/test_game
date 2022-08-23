@@ -1,13 +1,21 @@
-CC = g++
-CFLAGS = -c -I/usr/local/include
+CXX = g++
+CXXFLAGS = -g -c -I/usr/local/include
+LDFLAGS = -g -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 BUILD_DIR := ./build
 SRC_DIRS := ./src
-game: $(BUILD_DIR)/main.o
-	$(CC) -g -o game -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system $(BUILD_DIR)/main.o 
-$(BUILD_DIR)/main.o: $(SRC_DIRS)/main.cpp
-	mkdir -p build/
-	g++ -g -c -I/usr/local/include $(SRC_DIRS)/main.cpp -o $@
+OBJS := tiles.o main.o
+OBJS := $(OBJS:%=$(BUILD_DIR)/%)
 
+
+game: $(OBJS)
+	echo $(OBJS)
+	$(CXX) $(OBJS) -o game $(LDFLAGS) 
+
+$(BUILD_DIR)/%.o: $(SRC_DIRS)/%.cpp
+	mkdir -p build/
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+.PHONY: clean
 clean:
 	rm -rf build/ game

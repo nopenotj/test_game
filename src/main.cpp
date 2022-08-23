@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "tiles.h"
 
-#define LEN(arr) sizeof(arr)/sizeof(arr[0])
 
 class Character : public sf::Sprite {
 private:
@@ -30,42 +30,17 @@ public:
 
 };
 
-const constexpr float TILE_SIZE = 50;
-const constexpr int HEIGHT = 600, WIDTH = 800;
-
-struct Tile : sf::RectangleShape{
-    Tile() : RectangleShape(sf::Vector2f(TILE_SIZE, TILE_SIZE)){
-        // this->setFillColor(sf::Color::Green);
-        // this->setOutlineThickness(1.f);
-    }
-};
-
-struct TileMap {
-    Tile tiles[(int)(HEIGHT/TILE_SIZE)][(int)(WIDTH/TILE_SIZE)];
-    TileMap() {
-        setPosition();
-    }
-    void setPosition() {
-        for(int r=0; r < LEN(tiles); r++)
-            for(int c=0; c < LEN(tiles[r]); c++)
-                tiles[r][c].setPosition(c * TILE_SIZE,r * TILE_SIZE);
-    }
-};
-
-//TODO : Add in texture
 void load_map(TileMap& map) {
     static sf::Texture texture;
     texture.loadFromFile("./assets/textures.png");
 
-    int TEXTURE_SIZE = 15;
     for(auto& r: map.tiles) 
         for(auto& c: r) {
             c.setTexture(&texture); // texture is a sf::Texture
-            c.setTextureRect(sf::IntRect(0 * TEXTURE_SIZE, 28 * TEXTURE_SIZE - 2, TEXTURE_SIZE, TEXTURE_SIZE));
-        } 
-        
-    for(auto& c: map.tiles[0]) c.setFillColor(sf::Color::Blue);
-    map.tiles[3][3].setTextureRect(sf::IntRect(0 * TEXTURE_SIZE, 495, TEXTURE_SIZE, TEXTURE_SIZE));
+            c.setTextureRect(Tiles::Grass);
+        }    
+    for(auto& c: map.tiles[0]) c.setTextureRect(Tiles::Wood);
+    map.tiles[3][3].setTextureRect(Tiles::Stone);
 }
 // Possible Optimization. Currently checks against every possible boundary.
 bool has_collided(TileMap& map, sf::Sprite character){
@@ -90,7 +65,7 @@ struct UserEvent {
 };
 
 UserEvent handle_input() {
-    float d = 0.5;
+    float d = 0.3;
     float x = 0,y = 0;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))  x -= d;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) x += d;
@@ -110,8 +85,8 @@ int main()
     TileMap map;
 
     character.setPosition(500,500);
+    character.setScale(sf::Vector2f(0.5,0.5));
     load_map(map);
-
 
     while (window.isOpen())
     {
