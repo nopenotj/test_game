@@ -1,34 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "tiles.h"
+#include "character.h"
 
 
-class Character : public sf::Sprite {
-private:
-    sf::Texture texture;
-    bool move_left;
-    int i = 0;
-public:
-    Character() {
-        texture.loadFromFile("./assets/link.png");
-        this->setTexture(texture);
-        stop_move();
-    }
-
-    void move(float x, float y) {
-        sf::Sprite::move(x,y);
-        move_left = x < 0;
-        int row = move_left ? 5 : 7;
-        this->setTextureRect(sf::IntRect(i * 120, row * 130, 120, 130));
-        i = (i + 1) % 10;
-
-    }
-    void stop_move() {
-        i = 0;
-        this->setTextureRect(sf::IntRect(0, 0, 120, 130));
-    }
-
-};
 
 void load_map(TileMap& map) {
     static sf::Texture texture;
