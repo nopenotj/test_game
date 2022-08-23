@@ -3,7 +3,7 @@
 #include "constants.h"
 
 struct Tile : sf::RectangleShape{
-    Tile() : RectangleShape(sf::Vector2f(TILE_SIZE, TILE_SIZE)){}
+    Tile();
 };
 
 struct TileMap {

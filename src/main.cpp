@@ -2,21 +2,9 @@
 #include <iostream>
 #include "tiles.h"
 #include "character.h"
+#include "maps.cpp" // Currently creating my maps using cpp
 
 
-
-void load_map(TileMap& map) {
-    static sf::Texture texture;
-    texture.loadFromFile("./assets/textures.png");
-
-    for(auto& r: map.tiles) 
-        for(auto& c: r) {
-            c.setTexture(&texture); // texture is a sf::Texture
-            c.setTextureRect(Tiles::Grass);
-        }    
-    for(auto& c: map.tiles[0]) c.setTextureRect(Tiles::Wood);
-    map.tiles[3][3].setTextureRect(Tiles::Stone);
-}
 // Possible Optimization. Currently checks against every possible boundary.
 bool has_collided(TileMap& map, sf::Sprite character){
     std::vector<Tile> obstacle;
@@ -39,7 +27,7 @@ struct UserEvent {
     bool has_moved;
 };
 
-UserEvent handle_input() {
+UserEvent get_user_event() {
     float d = 0.3;
     float x = 0,y = 0;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))  x -= d;
@@ -57,11 +45,9 @@ int main()
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "test rpg");
 
     Character character;
-    TileMap map;
-
-    character.setPosition(500,500);
+    TileMap map = Maps::greenlands();
     character.setScale(sf::Vector2f(0.5,0.5));
-    load_map(map);
+    character.setPosition(WIDTH/2,HEIGHT/2);
 
     while (window.isOpen())
     {
@@ -72,7 +58,7 @@ int main()
                 window.close();
         }
         
-        auto e = handle_input();
+        auto e = get_user_event();
 
         if (!e.has_moved) character.stop_move();
         if (e.has_moved) { 
