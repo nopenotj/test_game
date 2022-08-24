@@ -3,7 +3,7 @@
 #include "tiles.h"
 #include "character.h"
 #include "maps.cpp" // Currently creating my maps using cpp
-
+#include "user_events.h"
 
 // Possible Optimization. Currently checks against every possible boundary.
 bool has_collided(TileMap& map, sf::Sprite character){
@@ -20,24 +20,6 @@ bool has_collided(TileMap& map, sf::Sprite character){
         };
     }
     return false;
-}
-
-struct UserEvent {
-    float x,y;
-    bool has_moved;
-};
-
-UserEvent get_user_event() {
-    float d = 0.3;
-    float x = 0,y = 0;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))  x -= d;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) x += d;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))  y += d;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))    y -= d;
-    
-    bool has_moved = x != 0 || y != 0;
-
-    return {x,y,has_moved};
 }
 
 int main()

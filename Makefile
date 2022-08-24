@@ -4,7 +4,7 @@ LDFLAGS = -g -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 BUILD_DIR := ./build
 SRC_DIRS := ./src
-OBJS := tiles.o main.o character.o
+OBJS := tiles.o main.o character.o user_events.o
 OBJS := $(OBJS:%=$(BUILD_DIR)/%)
 
 
