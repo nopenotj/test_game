@@ -11,6 +11,7 @@ Character::Character() {
     texture.loadFromFile("./assets/link.png");
     this->setTexture(texture);
     stop_move();
+    this->setScale(sf::Vector2f(0.5,0.5));
 }
 
 void Character::move(float x, float y) {

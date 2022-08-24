@@ -20,6 +20,11 @@ Tile::Tile() : RectangleShape(sf::Vector2f(TILE_SIZE, TILE_SIZE)){
 TileMap::TileMap() {
     setPosition();
 }
+void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    for(auto& r: this->tiles)
+        for(auto& c: r)
+            target.draw(c);
+}
 
 void TileMap::setPosition() {
     for(int r=0; r < LEN(tiles); r++)

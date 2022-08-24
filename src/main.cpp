@@ -7,12 +7,7 @@
 
 // Possible Optimization. Currently checks against every possible boundary.
 bool has_collided(TileMap& map, sf::Sprite character){
-    std::vector<Tile> obstacle;
-
-    for(auto &i :map.tiles[0]) obstacle.push_back(i);
-    obstacle.push_back(map.tiles[3][3]);
-    
-    for (auto& o: obstacle) {
+    for (auto& o: map.obstacles) {
         auto a = o.getGlobalBounds();
         auto b = character.getGlobalBounds();
         if(a.intersects(b)) {
@@ -28,8 +23,8 @@ int main()
 
     Character character;
     TileMap map = Maps::greenlands();
-    character.setScale(sf::Vector2f(0.5,0.5));
     character.setPosition(WIDTH/2,HEIGHT/2);
+
 
     while (window.isOpen())
     {
@@ -49,10 +44,8 @@ int main()
         }
 
         window.clear();
-        for(auto& r: map.tiles)
-            for(auto& c: r)
-                window.draw(c);
-        
+
+        window.draw(map);
         window.draw(character);
         window.display();
     }

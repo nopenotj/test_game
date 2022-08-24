@@ -6,10 +6,13 @@ struct Tile : sf::RectangleShape{
     Tile();
 };
 
-struct TileMap {
-    TileMap();
+struct TileMap :sf::Drawable{
     Tile tiles[(int)(HEIGHT/TILE_SIZE)][(int)(WIDTH/TILE_SIZE)];
+    std::vector<Tile> obstacles;
+
+    TileMap();
     void setPosition();
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 namespace Tiles {
