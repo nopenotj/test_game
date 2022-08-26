@@ -16,7 +16,7 @@ struct TileMap :sf::Drawable{
 };
 
 namespace Tiles {
-    extern int TEXTURE_SIZE;
+    const int TEXTURE_SIZE = 15;
 
     const sf::IntRect Grass = sf::IntRect(0 * TEXTURE_SIZE, 28 * TEXTURE_SIZE - 3, TEXTURE_SIZE, TEXTURE_SIZE);
     const sf::IntRect Wood = sf::IntRect(0 , 96, TEXTURE_SIZE, TEXTURE_SIZE);

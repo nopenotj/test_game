@@ -32,4 +32,3 @@ void TileMap::setPosition() {
             tiles[r][c].setPosition(c * TILE_SIZE,r * TILE_SIZE);
 }
 
-int Tiles::TEXTURE_SIZE = 15;

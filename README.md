@@ -57,3 +57,4 @@ solutions:
    - More flexible.
 
 
+Solving the external / internal linkage problem on tiles.h https://stackoverflow.com/questions/73448068/why-can-i-include-non-primitive-variables-in-my-header-files-without-running-int
