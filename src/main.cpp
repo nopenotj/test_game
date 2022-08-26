@@ -8,7 +8,7 @@
 // Possible Optimization. Currently checks against every possible boundary.
 bool has_collided(TileMap& map, sf::Sprite character){
     for (auto& o: map.obstacles) {
-        auto a = o.getGlobalBounds();
+        auto a = o->getGlobalBounds();
         auto b = character.getGlobalBounds();
         if(a.intersects(b)) {
             return true;
@@ -39,10 +39,11 @@ int main()
 
         if (!e.has_moved) character.stop_move();
         if (e.has_moved) { 
+            // To simulate movement, the map moves while the character stays on the spot.
             character.move(e.x,e.y);
-            if (has_collided(map, character)) character.move(-e.x,-e.y);
+            map.move(-e.x,-e.y);
+            if (has_collided(map, character)) map.move(e.x,e.y);
         }
-
         window.clear();
 
         window.draw(map);
