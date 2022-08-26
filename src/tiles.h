@@ -8,11 +8,10 @@ struct Tile : sf::RectangleShape{
 
 struct TileMap :sf::Drawable{
     Tile tiles[(int)(HEIGHT/TILE_SIZE)][(int)(WIDTH/TILE_SIZE)];
-    std::vector<Tile*> obstacles;
+    std::vector<Tile> obstacles;
 
     TileMap();
     void setPosition();
-    void move(float x, float y);
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 

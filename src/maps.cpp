@@ -14,8 +14,8 @@ namespace Maps {
         map.tiles[3][3].setTextureRect(Tiles::Stone);
 
         // Adding Obstacles
-        for(auto &i :map.tiles[0]) map.obstacles.push_back(&i);
-        map.obstacles.push_back(&map.tiles[3][3]);
+        for(auto &i :map.tiles[0]) map.obstacles.push_back(i);
+        map.obstacles.push_back(map.tiles[3][3]);
 
         return map;
     }

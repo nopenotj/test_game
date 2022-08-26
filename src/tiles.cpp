@@ -31,9 +31,4 @@ void TileMap::setPosition() {
         for(int c=0; c < LEN(tiles[r]); c++)
             tiles[r][c].setPosition(c * TILE_SIZE,r * TILE_SIZE);
 }
-void TileMap::move(float x, float y) {
-    for(auto& r: this->tiles)
-        for(auto& c: r)
-            c.move(x,y);
-}
 

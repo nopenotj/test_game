@@ -15,7 +15,7 @@ Character::Character() {
 }
 
 void Character::move(float x, float y) {
-    // sf::Sprite::move(x,y);
+    sf::Sprite::move(x,y);
     move_left = x < 0;
     this->setTextureRect(run_texture(move_left, i));
     i = (i + 1) % 10;
