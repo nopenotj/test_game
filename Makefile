@@ -12,7 +12,7 @@ game: $(OBJS)
 	echo $(OBJS)
 	$(CXX) $(OBJS) -o game $(LDFLAGS) 
 
-$(BUILD_DIR)/%.o: $(SRC_DIRS)/%.cpp
+$(BUILD_DIR)/%.o: $(SRC_DIRS)/%.cpp $(SRC_DIRS)/%.h
 	mkdir -p build/
 	$(CXX) $(CXXFLAGS) $< -o $@
 
