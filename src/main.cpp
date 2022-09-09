@@ -57,6 +57,7 @@ int main()
         window.draw(character);
 
 
+        logger->addDebug("x_offset: " + std::to_string(map.x) +"\ny_offset: "+ std::to_string(map.y));
         if(show_logs)window.draw(*logger);
         logger->clear();
 

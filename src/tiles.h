@@ -2,13 +2,17 @@
 #include <SFML/Graphics.hpp>
 #include "constants.h"
 
+#define ROW     100
+#define COLUMN  100
+
 struct Tile : sf::RectangleShape{
     Tile();
 };
 
 struct TileMap :sf::Drawable{
-    Tile tiles[(int)(HEIGHT/TILE_SIZE)][(int)(WIDTH/TILE_SIZE)];
+    Tile tiles[ROW][COLUMN];
     std::vector<Tile*> obstacles;
+    float x = 0,y = 0;
 
     TileMap();
     void setPosition();
