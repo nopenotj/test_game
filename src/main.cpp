@@ -4,6 +4,8 @@
 #include "character.h"
 #include "maps.cpp" // Currently creating my maps using cpp
 #include "user_events.h"
+#include "logger.h"
+
 
 // Possible Optimization. Currently checks against every possible boundary.
 bool has_collided(TileMap& map, sf::Sprite character){
@@ -24,17 +26,21 @@ int main()
     Character character;
     TileMap map = Maps::greenlands();
     character.setPosition(WIDTH/2,HEIGHT/2);
+    Logger* logger = Logger::getInstance();
 
-
+    bool show_logs = true;
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 window.close();
+                return 0;
+            }
+            if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::F1) show_logs = !show_logs;
+
         }
-        
         auto e = get_user_event();
 
         if (!e.has_moved) character.stop_move();
@@ -45,9 +51,15 @@ int main()
             if (has_collided(map, character)) map.move(e.x,e.y);
         }
         window.clear();
+        
 
         window.draw(map);
         window.draw(character);
+
+
+        if(show_logs)window.draw(*logger);
+        logger->clear();
+
         window.display();
     }
 
